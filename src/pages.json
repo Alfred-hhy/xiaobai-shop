@@ -9,6 +9,9 @@
     { "path": "pages/detail/detail",
       "style": { "navigationBarTitleText": "商品详情" }
     },
+    { "path": "pages/search/search",
+      "style": { "navigationBarTitleText": "搜索" }
+    },
     { "path": "pages/contact/contact",
       "style": { "navigationBarTitleText": "联系我们" }
     },
@@ -20,6 +23,9 @@
     },
     { "path": "pages/admin/edit",
       "style": { "navigationBarTitleText": "编辑商品" }
+    },
+    { "path": "pages/admin/categories",
+      "style": { "navigationBarTitleText": "分类管理" }
     }
   ],
   "globalStyle": {

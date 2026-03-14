@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { getProductById, createProduct, updateProduct, uploadImage, getSession } from '../../api/product.js'
+import { getProductById, createProduct, updateProduct, uploadImage, getSession, getAllCategories } from '../../api/product.js'
 import { supabase } from '../../lib/supabase.js'
 
 export default {
@@ -115,13 +115,7 @@ export default {
       },
       sizesText: '',
       colorsText: '',
-      categoryList: [
-        { id: 'dress', name: '连衣裙' },
-        { id: 'top', name: '上衣' },
-        { id: 'pants', name: '裤装' },
-        { id: 'skirt', name: '半裙' },
-        { id: 'health', name: '健康好物' }
-      ],
+      categoryList: [],
       categoryIndex: 0
     }
   },
@@ -135,6 +129,13 @@ export default {
     if (!session) {
       uni.redirectTo({ url: '/pages/admin/login' })
       return
+    }
+
+    // 动态加载分类
+    try {
+      this.categoryList = await getAllCategories()
+    } catch (e) {
+      uni.showToast({ title: '加载分类失败', icon: 'none' })
     }
 
     if (options.id) {

@@ -5,6 +5,7 @@
       <text class="top-title">商品管理</text>
       <view class="top-actions">
         <text class="btn-add" @click="goAdd">+ 新增</text>
+        <text class="btn-cat" @click="goCategories">分类</text>
         <text class="btn-logout" @click="handleLogout">退出</text>
       </view>
     </view>
@@ -83,6 +84,9 @@ export default {
     goAdd() {
       uni.navigateTo({ url: '/pages/admin/edit' })
     },
+    goCategories() {
+      uni.navigateTo({ url: '/pages/admin/categories' })
+    },
     goEdit(id) {
       uni.navigateTo({ url: `/pages/admin/edit?id=${id}` })
     },
@@ -156,6 +160,14 @@ export default {
   color: #fff;
   font-size: 26rpx;
   border-radius: 8rpx;
+}
+.btn-cat {
+  padding: 10rpx 24rpx;
+  background: #fff;
+  color: #d4756e;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  border: 1rpx solid #d4756e;
 }
 .btn-logout {
   padding: 10rpx 24rpx;

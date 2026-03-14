@@ -9,6 +9,12 @@
     </view>
 
     <scroll-view scroll-y class="scroll-content" :style="{ paddingTop: navHeight + 'px' }">
+      <!-- 搜索栏 -->
+      <view class="search-bar" @click="goSearch">
+        <text class="search-icon">🔍</text>
+        <text class="search-placeholder">搜索商品...</text>
+      </view>
+
       <!-- Banner 轮播 -->
       <view class="banner-wrap">
         <swiper class="banner" circular autoplay :interval="3500" :duration="500" indicator-dots indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#d4756e">
@@ -119,6 +125,9 @@ export default {
     },
     goCategory(categoryId) {
       uni.switchTab({ url: '/pages/category/category' })
+    },
+    goSearch() {
+      uni.navigateTo({ url: '/pages/search/search' })
     }
   }
 }
@@ -157,6 +166,20 @@ export default {
   font-size: 20rpx;
   margin-top: 2rpx;
 }
+
+/* Banner */
+.search-bar {
+  margin: 20rpx 24rpx 0;
+  height: 72rpx;
+  background: #fff;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+.search-icon { font-size: 28rpx; margin-right: 12rpx; }
+.search-placeholder { font-size: 26rpx; color: #bbb; }
 
 /* Banner */
 .banner-wrap {
