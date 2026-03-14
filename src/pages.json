@@ -1,0 +1,42 @@
+{
+  "pages": [
+    { "path": "pages/index/index",
+      "style": { "navigationStyle": "custom" }
+    },
+    { "path": "pages/category/category",
+      "style": { "navigationBarTitleText": "全部商品" }
+    },
+    { "path": "pages/detail/detail",
+      "style": { "navigationBarTitleText": "商品详情" }
+    },
+    { "path": "pages/contact/contact",
+      "style": { "navigationBarTitleText": "联系我们" }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "小白衣橱",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#faf8f6"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#d4756e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/contact/contact",
+        "text": "联系我们"
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+[
+  { "id": "all", "name": "全部", "icon": "👗" },
+  { "id": "dress", "name": "连衣裙", "icon": "👗" },
+  { "id": "top", "name": "上衣", "icon": "👚" },
+  { "id": "pants", "name": "裤装", "icon": "👖" },
+  { "id": "skirt", "name": "半裙", "icon": "🩳" },
+  { "id": "health", "name": "健康好物", "icon": "🌿" }
+]
