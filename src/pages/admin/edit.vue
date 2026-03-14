@@ -187,17 +187,29 @@ export default {
         sizeType: ['compressed'],
         sourceType: ['album', 'camera'],
         success: async (res) => {
-          for (const tempPath of res.tempFilePaths) {
+          const files = res.tempFiles || []
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i]
             try {
               uni.showLoading({ title: '上传中...' })
-              // 读取文件并上传
-              const response = await fetch(tempPath)
-              const blob = await response.blob()
-              const fileName = `products/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.jpg`
+              const ext = (file.name || 'photo.jpg').split('.').pop().toLowerCase()
+              const fileName = `products/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`
+
+              // H5 环境: tempFiles 直接是 File 对象
+              // 小程序环境: 需要用 fetch 转 blob
+              let uploadData = file
+              if (!(file instanceof File) && !(file instanceof Blob)) {
+                const path = file.path || res.tempFilePaths[i]
+                const resp = await fetch(path)
+                uploadData = await resp.blob()
+              }
 
               const { error } = await supabase.storage
                 .from('product-images')
-                .upload(fileName, blob, { contentType: 'image/jpeg' })
+                .upload(fileName, uploadData, {
+                  contentType: file.type || 'image/jpeg',
+                  upsert: false
+                })
 
               if (error) throw error
 
@@ -207,7 +219,8 @@ export default {
 
               this.form.images.push(urlData.publicUrl)
             } catch (e) {
-              uni.showToast({ title: '上传失败', icon: 'none' })
+              console.error('上传失败:', e)
+              uni.showToast({ title: '上传失败: ' + (e.message || '未知错误'), icon: 'none', duration: 3000 })
             } finally {
               uni.hideLoading()
             }
