@@ -24,6 +24,9 @@ jobs:
           sed -i '/"vueVersion"/a\    ,"h5":{"router":{"base":"/xiaobai-shop/"}}' src/manifest.json
 
       - name: Build H5
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npx uni build -p h5
 
       - name: Deploy to GitHub Pages

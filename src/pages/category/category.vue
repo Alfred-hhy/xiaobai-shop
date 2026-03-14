@@ -59,17 +59,25 @@ export default {
       filteredProducts: []
     }
   },
-  onLoad() {
-    this.categories = getCategories()
-    this.loadProducts()
+  async onLoad() {
+    try {
+      this.categories = await getCategories()
+      await this.loadProducts()
+    } catch (e) {
+      console.error('加载数据失败:', e)
+    }
   },
   methods: {
     switchCategory(id) {
       this.currentCategory = id
       this.loadProducts()
     },
-    loadProducts() {
-      this.filteredProducts = getProductsByCategory(this.currentCategory)
+    async loadProducts() {
+      try {
+        this.filteredProducts = await getProductsByCategory(this.currentCategory)
+      } catch (e) {
+        console.error('加载商品失败:', e)
+      }
     },
     goDetail(id) {
       uni.navigateTo({ url: `/pages/detail/detail?id=${id}` })

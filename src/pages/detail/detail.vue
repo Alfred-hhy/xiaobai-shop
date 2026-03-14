@@ -78,11 +78,15 @@ export default {
       wechatId: 'xiaobai_shop'  // 替换为真实微信号
     }
   },
-  onLoad(options) {
+  async onLoad(options) {
     if (options.id) {
-      this.product = getProductById(options.id)
-      if (this.product) {
-        uni.setNavigationBarTitle({ title: this.product.name })
+      try {
+        this.product = await getProductById(options.id)
+        if (this.product) {
+          uni.setNavigationBarTitle({ title: this.product.name })
+        }
+      } catch (e) {
+        console.error('加载商品详情失败:', e)
       }
     }
   },

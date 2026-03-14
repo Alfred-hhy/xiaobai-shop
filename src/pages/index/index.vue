@@ -94,15 +94,24 @@ export default {
       categories: []
     }
   },
-  onLoad() {
+  async onLoad() {
     const sysInfo = uni.getSystemInfoSync()
     this.statusBarHeight = sysInfo.statusBarHeight || 20
     this.navHeight = this.statusBarHeight + 44
 
-    this.categories = getCategories()
-    this.newProducts = getNewProducts()
-    this.hotProducts = getRecommendProducts()
-    this.bannerProducts = this.hotProducts.slice(0, 4)
+    try {
+      const [categories, newProducts, hotProducts] = await Promise.all([
+        getCategories(),
+        getNewProducts(),
+        getRecommendProducts()
+      ])
+      this.categories = categories
+      this.newProducts = newProducts
+      this.hotProducts = hotProducts
+      this.bannerProducts = this.hotProducts.slice(0, 4)
+    } catch (e) {
+      console.error('加载数据失败:', e)
+    }
   },
   methods: {
     goDetail(id) {

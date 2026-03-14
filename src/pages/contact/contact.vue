@@ -4,7 +4,7 @@
     <view class="banner">
       <view class="banner-bg"></view>
       <view class="banner-content">
-        <view class="avatar">小白</view>
+        <view class="avatar" @click="onLogoTap">小白</view>
         <text class="shop-name">小白衣橱</text>
         <text class="shop-slogan">小个子女生的专属衣橱</text>
       </view>
@@ -71,6 +71,8 @@ export default {
   data() {
     return {
       wechatId: 'xiaobai_shop', // 替换为真实微信号
+      tapCount: 0,
+      tapTimer: null,
       notices: [
         '所有商品均为真人实拍，因光线和屏幕差异可能存在轻微色差',
         '服装类商品支持7天无理由退换（需保持吊牌完好）',
@@ -91,6 +93,15 @@ export default {
           })
         }
       })
+    },
+    onLogoTap() {
+      this.tapCount++
+      clearTimeout(this.tapTimer)
+      this.tapTimer = setTimeout(() => { this.tapCount = 0 }, 3000)
+      if (this.tapCount >= 5) {
+        this.tapCount = 0
+        uni.navigateTo({ url: '/pages/admin/login' })
+      }
     }
   }
 }

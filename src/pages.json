@@ -11,6 +11,15 @@
     },
     { "path": "pages/contact/contact",
       "style": { "navigationBarTitleText": "联系我们" }
+    },
+    { "path": "pages/admin/login",
+      "style": { "navigationBarTitleText": "管理登录" }
+    },
+    { "path": "pages/admin/products",
+      "style": { "navigationBarTitleText": "商品管理" }
+    },
+    { "path": "pages/admin/edit",
+      "style": { "navigationBarTitleText": "编辑商品" }
     }
   ],
   "globalStyle": {
